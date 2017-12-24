@@ -6,7 +6,7 @@ This is a DHT11 Driver for ESP8266 - open SDK. This driver has been designed con
  
  Website     :  https://deeplyembedded.org/dht11-esp8266-open-sdk/
  
- Youtube     : https://youtu.be/sDKf6zW6Pyg
+ Youtube     : https://youtu.be/TyRViz0U7cc
 
  MIT license, check LICENSE file for more information
  
