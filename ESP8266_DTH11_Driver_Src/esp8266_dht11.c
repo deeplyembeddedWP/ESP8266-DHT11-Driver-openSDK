@@ -96,7 +96,6 @@ void DHT11_Get_Data(DHT11_Ptr dhtt_dev_Ptr)
 {
 	unsigned long count = 0x00;
 	char T_str[8], H_str[8];
-
 	dhtt_dev_Ptr->dht11_state = ERROR;
 
 	/* Request for data from DTH11 */
