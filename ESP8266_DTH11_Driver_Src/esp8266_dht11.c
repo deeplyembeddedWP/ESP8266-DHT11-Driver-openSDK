@@ -102,7 +102,7 @@ void DHT11_Get_Data(DHT11_Ptr dhtt_dev_Ptr)
 	/* Request for data from DTH11 */
 	DHT11_start(dhtt_dev_Ptr->comm_pin_no);
 
-	/* Capture and print response signal low counts */
+	/* Detect the response from the dht11 */
 	dhtt_dev_Ptr->dht11_state = DHT11_detect_response(dhtt_dev_Ptr->comm_pin_no);
 
 	/* Decode the data if the response is valid */
@@ -111,7 +111,7 @@ void DHT11_Get_Data(DHT11_Ptr dhtt_dev_Ptr)
 	else
 		os_printf("Time out\r\n");
 
-	/* Compress and the data if the packet is valid */
+	/* Compress the data if the packet is valid */
 	if (dhtt_dev_Ptr->dht11_state == GOOD_DATA)
 		dhtt_dev_Ptr->dht11_state = DHT11_package_data(dhtt_dev_Ptr->dht11_pkt_compressed, dhtt_dev_Ptr->dht11_pkt);
 	else
