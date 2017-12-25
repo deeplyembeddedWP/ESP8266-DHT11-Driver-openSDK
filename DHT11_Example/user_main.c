@@ -60,8 +60,8 @@ void Read_dht11_data(DHT11_Ptr dhtt_app_Ptr)
 
 /****************************************************************
  * Function Name : dht11_app_tmr
- * Description   : Initialize and set up for reading the app for
- *                 reading the temperature and humidity data.
+ * Description   : Initialize and set up the app for reading the 
+                   temperature and humidity data.
  * Returns       : NONE.
  * Params        : @dhtt_app_Ptr  - Pointer to the dht11 object.
  *                 @esp_app_timer - Pointer to timer object.
