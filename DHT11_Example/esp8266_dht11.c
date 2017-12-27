@@ -53,10 +53,6 @@ static void DHT11_Init(DHT11_Ptr dht_dev_Ptr,unsigned int st_sig_low_ms, unsigne
 		int data_pin);
 static void DHT11_Get_Data(DHT11_Ptr dhtt_dev_Ptr);
 
-/* Function  Prototypes - API to be used by the Application Programmer */
-void init_dht11_dev1(DHT11_Ptr dhtt_dev_Ptr, os_timer_t *esp_timer,
-		int timer_us, bool repeat);
-
 
 /****************************************************************
  * Function Name : DHT11_Init
