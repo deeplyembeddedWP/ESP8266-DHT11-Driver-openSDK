@@ -100,4 +100,8 @@ typedef struct{
 	DHT11_State dht11_state;
 }DHT11_T, *DHT11_Ptr;
 
+/* Function  Prototypes - API to be used by the Application Programmer */
+extern void init_dht11_dev1(DHT11_Ptr dhtt_dev_Ptr, os_timer_t *esp_timer,
+		int timer_us, bool repeat);
+
 #endif
