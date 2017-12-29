@@ -45,13 +45,14 @@ SOFTWARE.
 //#define DHT_DBG_RESP
 
 /* Static Functions */
-static void DHT11_start(unsigned char data_pin);
+static void ICACHE_FLASH_ATTR DHT11_start(unsigned char data_pin);
 static DHT11_State DHT11_detect_response(unsigned char dat_pin);
 static DHT11_State DHT11_decode_data(unsigned char dat_pin_d, unsigned char *pkt_cnt);
-static DHT11_State DHT11_package_data(unsigned char *comp_pkt, unsigned char *uncomp_pkt);
-static void DHT11_Init(DHT11_Ptr dht_dev_Ptr,unsigned int st_sig_low_ms, unsigned int st_sig_high_us,
+static ICACHE_FLASH_ATTR DHT11_State DHT11_package_data(unsigned char *comp_pkt, unsigned char *uncomp_pkt);
+static void ICACHE_FLASH_ATTR DHT11_Init(DHT11_Ptr dht_dev_Ptr,unsigned int st_sig_low_ms, unsigned int st_sig_high_us,
 		int data_pin);
 static void DHT11_Get_Data(DHT11_Ptr dhtt_dev_Ptr);
+
 
 /****************************************************************
  * Function Name : DHT11_Init
@@ -62,7 +63,7 @@ static void DHT11_Get_Data(DHT11_Ptr dhtt_dev_Ptr);
  *                 @st_sig_high_us - Request signal high time
  *                 @data_pin       - Communication pin
  ****************************************************************/
-void DHT11_Init(DHT11_Ptr dht_dev_Ptr,
+void ICACHE_FLASH_ATTR DHT11_Init(DHT11_Ptr dht_dev_Ptr,
 		unsigned int st_sig_low_ms,
 		unsigned int st_sig_high_us,
 		int data_pin)
@@ -91,12 +92,13 @@ void DHT11_Get_Data(DHT11_Ptr dhtt_dev_Ptr)
 {
 	unsigned long count = 0x00;
 	char T_str[8], H_str[8];
+
 	dhtt_dev_Ptr->dht11_state = ERROR;
 
 	/* Request for data from DTH11 */
 	DHT11_start(dhtt_dev_Ptr->comm_pin_no);
 
-	/* Detect the response from the dht11 */
+	/* Capture and print response signal low counts */
 	dhtt_dev_Ptr->dht11_state = DHT11_detect_response(dhtt_dev_Ptr->comm_pin_no);
 
 	/* Decode the data if the response is valid */
@@ -105,7 +107,7 @@ void DHT11_Get_Data(DHT11_Ptr dhtt_dev_Ptr)
 	else
 		os_printf("Time out\r\n");
 
-	/* Compress the data if the packet is valid */
+	/* Compress and the data if the packet is valid */
 	if (dhtt_dev_Ptr->dht11_state == GOOD_DATA)
 		dhtt_dev_Ptr->dht11_state = DHT11_package_data(dhtt_dev_Ptr->dht11_pkt_compressed, dhtt_dev_Ptr->dht11_pkt);
 	else
@@ -143,7 +145,7 @@ void DHT11_Get_Data(DHT11_Ptr dhtt_dev_Ptr)
  * Returns       : NONE.
  * Params        : @data_pin - Communication pin
  ****************************************************************/
-void DHT11_start(unsigned char data_pin)
+void ICACHE_FLASH_ATTR DHT11_start(unsigned char data_pin)
 {
 	pinMode(data_pin, OUTPUT);
 	digitalWrite(data_pin, LOW);
@@ -263,7 +265,7 @@ DHT11_State DHT11_decode_data(unsigned char dat_pin_d, unsigned char *pkt_cnt)
  * Params        : @comp_pkt       - Pointer to uncompressed pkt
  *                 @uncomp_pkt     - Pointer to compressed pkt
  ****************************************************************/
-DHT11_State DHT11_package_data(unsigned char *comp_pkt, unsigned char *uncomp_pkt)
+DHT11_State ICACHE_FLASH_ATTR DHT11_package_data(unsigned char *comp_pkt, unsigned char *uncomp_pkt)
 {
 	int i = 0x00, j = 0x00, pos = 0x00, check_sum = 0x00;
 
@@ -310,7 +312,7 @@ DHT11_State DHT11_package_data(unsigned char *comp_pkt, unsigned char *uncomp_pk
  *                 @timer_us     - Timer firing interval
  *                 @repeat       - 1 for repeat and 0 for one shot.
  ****************************************************************/
-void init_dht11_dev1(DHT11_Ptr dhtt_dev_Ptr, os_timer_t *esp_timer,
+void ICACHE_FLASH_ATTR init_dht11_dev1(DHT11_Ptr dhtt_dev_Ptr, os_timer_t *esp_timer,
 		int timer_us, bool repeat)
 {
 	/* Initialize the DHT11 data structure */
